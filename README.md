@@ -157,10 +157,11 @@ MIT
 ## 数据库形式
 ### milvus
 **表结构**
-milvus_cli > show collection -c qa_collection
-+---------------+-----------------------------------+
-| Name          | qa_collection                     |
-+---------------+-----------------------------------+
+milvus_cli > show collection -c qa_collection 
+
++---------------+-----------------------------------+ \
+| Name          | qa_collection                     | \
++---------------+-----------------------------------+ \
 | Description   |                                   |
 +---------------+-----------------------------------+
 | Entities      | 14256                             |
@@ -181,6 +182,7 @@ milvus_cli > show collection -c qa_collection
 +---------------+-----------------------------------+
 | Indexes       | - question_emb                    |
 +---------------+-----------------------------------+
+
 **数据示例**
 | id | question | knowledge | question_emb |
 |---|---|---|---|
