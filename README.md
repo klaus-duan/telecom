@@ -190,3 +190,15 @@ redis-cli> KEYS "dev:chat:*"
 3) "dev:chat:0d416a9d-c425-455c-9cc8-375ebb64ca02:req_ids"    #第1条请求的响应缓存
 4) "dev:chat:0d416a9d-c425-455c-9cc8-375ebb64ca02:resp:r2"    #第2条请求的响应缓存
 ```
+
+### PostgreSQL
+**表结构**
+
+| column_name | data_type | is_nullable | column_default |
+|-------------|-----------|-------------|----------------|
+| id | bigint | NO | nextval('chat_history_id_seq'::regclass) |
+| conversation_id | uuid | NO | *NULL* |
+| request_id | text | NO | *NULL* |
+| message | text | NO | *NULL* |
+| answer | text | NO | *NULL* |
+| time | timestamp with time zone | NO | now() |
