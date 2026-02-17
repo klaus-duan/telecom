@@ -159,29 +159,22 @@ MIT
 **表结构**
 milvus_cli > show collection -c qa_collection 
 
-+---------------+-----------------------------------+ \
-| Name          | qa_collection                     | \
-+---------------+-----------------------------------+ \
-| Description   |                                   |
-+---------------+-----------------------------------+
-| Entities      | 14256                             |
-+---------------+-----------------------------------+
-| Is Empty      | False                             |
-+---------------+-----------------------------------+
-| Primary Field | id                                |
-+---------------+-----------------------------------+
-| Schema        | Description:                      |
-|               |                                   |
-|               | Fields(* is the primary field):   |
-|               |  - *id 5                          |
-|               |  - question 21 max_length: 2048   |
-|               |  - knowledge 21 max_length: 65535 |
-|               |  - question_emb 101 dim: 1024     |
-+---------------+-----------------------------------+
-| Partitions    | - _default                        |
-+---------------+-----------------------------------+
-| Indexes       | - question_emb                    |
-+---------------+-----------------------------------+
+| 属性 | 值 |
+|---|---|
+| Name | qa_collection |
+| Description | |
+| Entities | 14256 |
+| Is Empty | False |
+| Primary Field | id |
+| Schema | Description: |
+| | |
+| | Fields(* is the primary field): |
+| | - *id 5 |
+| | - question 21 max_length: 2048 |
+| | - knowledge 21 max_length: 65535 |
+| | - question_emb 101 dim: 1024 |
+| Partitions | - _default |
+| Indexes | - question_emb |
 
 **数据示例**
 | id | question | knowledge | question_emb |
