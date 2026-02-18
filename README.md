@@ -217,6 +217,7 @@ bm25对专有名词精准匹配效果好，不依赖语义理解，简单直接�
 <p>
 RRF得分 = 1/(k + rank<sub>BM25</sub>) + 1/(k + rank<sub>cosine</sub>)
 </p>
+
 **embedding model** : 
 
 - [text2vec-bge-large-chinese](https://huggingface.co/shibing624/text2vec-bge-large-chinese)
