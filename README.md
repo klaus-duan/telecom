@@ -217,14 +217,14 @@ bm25对专有名词精准匹配效果好，不依赖语义理解，简单直接�
 <p>
 RRF得分 = 1/(k + rank<sub>BM25</sub>) + 1/(k + rank<sub>cosine</sub>)
 </p>
-**embedding model**: 
+**embedding model** : 
 
 - [text2vec-bge-large-chinese](https://huggingface.co/shibing624/text2vec-bge-large-chinese)
 
-| 阈值   | 0.5   | 0.7   | 0.8   |
+| 阈值   | 0.8   | 0.7   | 0.5   |
 |--------|-------|-------|-------|
-| topk   | 5     | 4     | 3     |
-| 召回率 | 0.756 | 0.467 | 0.263 |
+| topk   | 3     | 4     | 5     |
+| 召回率 | 0.263 | 0.467 | 0.756 |
 
 - ✅[BAAI/bge-large-zh](https://huggingface.co/BAAI/bge-large-zh)
 
@@ -232,3 +232,6 @@ RRF得分 = 1/(k + rank<sub>BM25</sub>) + 1/(k + rank<sub>cosine</sub>)
 |--------|------|------|------|------|------|------|------|------|------|
 | topk   | 1    | 1    | 1    | 2    | 3    | 1    | 2    | 3    | 5    |
 | 召回率 | 0.160|0.381 |0.587 |0.613 |0.621 |0.811 |0.878 |0.908 |0.929 |
+
+### 精排（top10 → top1）
+**reranker**：✅[BAAI/bge-reranker-base](https://huggingface.co/BAAI/bge-reranker-base)
