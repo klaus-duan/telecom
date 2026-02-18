@@ -209,7 +209,7 @@ redis-cli> KEYS "dev:chat:*"
 - IVF：k-means聚类后，桶内计算相似度
 - ✅HNSW：多层近邻图
 
-### 粗排（几万 → top10）
+### 粗排（几万 → top5）
 bm25 + 余弦相似度。\
 bm25对专有名词精准匹配效果好，不依赖语义理解，简单直接。无法处理同义词且丢失语序信息。\
 余弦相似度处理同义句、意图理解效果好，理解深层语义。对专有名词不敏感。\
@@ -233,5 +233,7 @@ RRF得分 = 1/(k + rank<sub>BM25</sub>) + 1/(k + rank<sub>cosine</sub>)
 | topk   | 1    | 1    | 1    | 2    | 3    | 1    | 2    | 3    | 5    |
 | 召回率 | 0.160|0.381 |0.587 |0.613 |0.621 |0.811 |0.878 |0.908 |0.929 |
 
-### 精排（top10 → top1）
+**最终选择BAAI/bge-large-zh，top_p=0.5，top_k=5**
+
+### 精排（top5 → top1）
 **reranker**：✅[BAAI/bge-reranker-base](https://huggingface.co/BAAI/bge-reranker-base)
