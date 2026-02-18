@@ -213,4 +213,4 @@ redis-cli> KEYS "dev:chat:*"
 bm25 + 余弦相似度。\
 bm25对专有名词精准匹配效果好，不依赖语义理解，简单直接。无法处理同义词且丢失语序信息。\
 余弦相似度处理同义句、意图理解效果好，理解深层语义。对专有名词不敏感。\
-**RRF**等于二者结合：$$frac{1}{k+bm25排名} + frac{1}{k+cosine排名}$$
+**RRF**等于二者结合：$\text{RRF}(d) = \frac{1}{k + \text{rank}_{\text{bm25}}(d)} + \frac{1}{k + \text{rank}_{\text{cosine}}(d)}$
