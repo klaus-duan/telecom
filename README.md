@@ -157,6 +157,7 @@ MIT
 ## 数据库形式
 ### milvus
 **表结构**
+
 milvus_cli > show collection -c qa_collection 
 
 | 属性 | 值 |
