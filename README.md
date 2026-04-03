@@ -1,7 +1,7 @@
 # Telecom AI Agent
 ![全流程图](flowchart.png)
 
-## 基于 LangGraph + Agentic RAG 的电信智能客服 Multi-Agent 系统的最小实现。
+## 基于 LangGraph + Agentic RAG 的上海电信智能客服 Multi-Agent 系统的最小实现。
 
 ## 项目简介
 
