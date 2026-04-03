@@ -1,26 +1,26 @@
 # Telecom AI Agent
 ![全流程图](flowchart.png)
 
-基于 LangGraph + RAG 的电信智能客服 Agent 系统。
+## 基于 LangGraph + Agentic RAG 的电信智能客服 Multi-Agent 系统的最小实现。
 
 ## 项目简介
 
-本项目是一个面向电信业务的智能客服 Agent，采用 LangGraph 构建工作流，结合 RAG，能够智能理解用户意图、检索业务知识库并生成精准回答。
+本项目是一个面向上海电信业务的智能客服 Multi-Agent，采用 LangGraph 构建工作流，结合 RAG，能够智能理解用户意图、检索业务知识库并生成精准回答。
 
-### 核心特性
+### 核心功能
 
-- **智能路由**：根据用户问题自动判断是否需要检索知识库（RAG/NO_RAG/TOOL/CLARIFY）
-- **工具调用**：支持 Function Calling，可调用知识库检索工具
-- **多轮对话**：基于 Redis 维护对话历史，支持上下文理解
-- **数据持久化**：对话记录可持久化到 PostgreSQL
-- **幂等保护**：防止重复请求，确保接口稳定性
+- **ReAct Agent**：根据用户问题识别意图，结合问题和对话历史检索对应知识。
+- **Reflection Agent**：首先判断ReAct Agent提供的信息是否足够回答用户问题，生成回答并自主检查。
+- **工具调用**：支持 Function Calling，可调用知识库检索工具。
+- **多轮对话**：基于 Redis 维护对话历史，支持上下文理解。
+- **数据持久化**：对话记录可持久化到 PostgreSQL。
 
 ## 技术栈
 
 | 组件 | 技术 |
 |------|------|
 | 框架 | FastAPI + LangGraph |
-| 大模型 | Qwen (通义千问) |
+| 大模型 | Qwen1.5系列 |
 | 向量数据库 | Milvus |
 | 缓存/会话 | Redis |
 | 数据持久化 | PostgreSQL |
