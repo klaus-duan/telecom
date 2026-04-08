@@ -183,13 +183,92 @@ milvus_cli > show collection -c qa_collection
 | 5 | 我想下载上个月的发票怎么操作 | 开发票、查询发票、合并发票、下载发票方法 -电子发票（包括实缴发票、充值发票、月结发票）分为个人和企业两种，点击链接即可线上办理，无需线下办理。链接有所不同： 个人电子发票：点击进入该小程序链接：#小程序://上海电信/lTOQOyYnCF4rLqf 即可线上查询发票、合并开票、开具和下载电子发票（包括实缴发票、充值发票、月结发票）。 企业电子发票：进入该https链接：https://1go.sh.189.cn/billing/yw/zs/xz_pc/yun_m_2022.htm?ptk=123&fs=1&type=xcx 即... | [-0.0015246168,-0.045919843,-0.0075209057,-0.0065605766,0.011926289,0.010762139,-0.00003397221,0.0009114785,0.005358622,-0.0046699075,0.0008535707,0.052...] |
 
 ### redis
-**表结构**
-```shell
-redis-cli> KEYS "dev:chat:*"
-1) "dev:chat:0d416a9d-c425-455c-9cc8-375ebb64ca02:resp:r1"    #对话消息列表
-2) "dev:chat:0d416a9d-c425-455c-9cc8-375ebb64ca02:messages"   #请求ID集合
-3) "dev:chat:0d416a9d-c425-455c-9cc8-375ebb64ca02:req_ids"    #第1条请求的响应缓存
-4) "dev:chat:0d416a9d-c425-455c-9cc8-375ebb64ca02:resp:r2"    #第2条请求的响应缓存
+**表结构示例**
+```
+`KEY` bot:session:{session_id}
+```
+```json
+`VALUE`{
+  "session_id": "sess_20260408162714_7f2c9d4e",
+  "metadata_type": "cli:direct",
+  "created_at": "2026-04-08T16:27:14.688754+08:00",
+  "updated_at": "2026-04-08T16:30:59.763396+08:00",
+
+  "messages": [
+    // ======================
+    // round: 1  第一轮
+    // 用户问 → 模型答
+    // ======================
+    {
+      "round": 1,
+      "role": "user",
+      "content": "你自带的web搜索工具要不要api或者翻墙"
+    },
+    {
+      "round": 1,
+      "role": "assistant",
+      "content": "不需要 API 密钥，但可能需要翻墙。\n\n**web_search 工具说明：**..."
+    },
+
+    // ======================
+    // round: 2  第二轮
+    // 用户问 → 模型调用工具 → 工具返回 → 模型最终回答
+    // 全部都属于 round:2
+    // ======================
+    {
+      "round": 2,
+      "role": "user",
+      "content": "测试一下,国内国外网站都测试"
+    },
+    {
+      "round": 2,
+      "role": "assistant",
+      "content": "好的，我来测试一下 web 搜索工具，分别测试国内和国外网站。",
+      "tool_calls": [
+        {"id": "call_aa1ea9e4", "name": "web_search"},
+        {"id": "call_5282842d", "name": "web_search"}
+      ]
+    },
+    {
+      "round": 2,
+      "role": "tool",
+      "tool_call_id": "call_aa1ea9e4",
+      "tool_name": "web_search",
+      "content": "Results for: Python 人工智能 2026..."
+    },
+    {
+      "round": 2,
+      "role": "tool",
+      "tool_call_id": "call_5282842d",
+      "tool_name": "web_search",
+      "content": "Results for: AI machine learning trends 2026..."
+    },
+    {
+      "round": 2,
+      "role": "assistant",
+      "content": "✅ 测试成功！搜索功能工作正常。..."
+    }
+  ],
+
+  "summaries": [
+    {
+      "summary_id": "sum_1",
+      "start_round": 1,
+      "end_round": 10,
+      "summary_md": "# 1～10轮对话摘要\n\n用户先询问Web搜索工具是否需要API与翻墙；随后要求测试国内外网站搜索能力，模型执行两次web_search并返回结果。过程中参考<|Redis最佳实践|>、<|AI对话上下文存储规范|>。",
+      "ref_docs": [
+        {
+          "doc_name": "Redis最佳实践",
+          "doc_md": "# Redis最佳实践\n1. key使用冒号分隔\n2. value避免超大JSON\n3. 必须设置过期时间..."
+        },
+        {
+          "doc_name": "AI对话上下文存储规范",
+          "doc_md": "# AI对话上下文存储规范\n1. 每10轮生成摘要\n2. 引用文档只存名称，用<|文档名|>标记\n3. 摘要与文档统一使用markdown格式..."
+        }
+      ]
+    }
+  ]
+}
 ```
 
 ### PostgreSQL
